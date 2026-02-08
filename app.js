@@ -22,7 +22,7 @@ const userRouter = require("./routes/user.js");
 
 
 const sessionOptions = {
-    secret: "secretCode",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -82,17 +82,6 @@ app.use((req, res, next) => {
     res.locals.currUser = req.user;
     // console.log(success);
     next();
-});
-
-
-app.get("/demouser", async (req, res) => {
-    let fakeUser = new User({
-        email : "student@gmail.com",
-        username: "delta-student"
-    });
-
-    let registeredUser = await User.register(fakeUser, "helloworld");
-    res.send(registeredUser);
 });
  
 
