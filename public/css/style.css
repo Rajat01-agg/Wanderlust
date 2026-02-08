@@ -252,3 +252,10 @@ body {
     50% { transform: translateY(-25px); }
     100% { transform: translateY(0px); }
 }
+
+
+
+#map {
+    height: 400px;
+    width: 80vh;
+}
