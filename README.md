@@ -1,6 +1,6 @@
 # WanderLust
 
-WanderLust is a full-stack travel marketplace where hosts can publish boutique stays, guests can browse curated destinations, and authenticated users can leave verified reviews. The stack combines Express, MongoDB, and server-rendered EJS templates with Passport authentication, Multer-powered uploads, and Cloudinary asset delivery to deliver an Airbnb-style experience that stays lightweight for local development.
+WanderLust is a full-stack travel marketplace where hosts can publish boutique stays, guests can browse curated destinations, and authenticated users can leave verified reviews. The stack combines Express, MongoDB, and server-rendered EJS templates with Passport authentication, Multer-powered uploads, and Clgoudinary asset delivery to deliver a seamless booking experience that stays lightweight for local development.
 
 ## 🌐 Live Demo
 **[View Live Application](https://tripnest-nb7z.onrender.com/)**
