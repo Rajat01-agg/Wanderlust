@@ -9,6 +9,7 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -19,9 +20,22 @@ const ExpressError = require("./util/ExpressError.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const dbUrl = process.env.DB_URL;
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET_KEY,
+    },
+    touchAfter: 24*60*60, // time period in seconds
+});
+
+store.on("error", function(e){
+    console.log("Session Store Error!", e);
+}); 
 
 const sessionOptions = {
+    store,
     secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
@@ -32,6 +46,8 @@ const sessionOptions = {
     },
 }
 
+
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -39,28 +55,15 @@ app.use(methodOverride('_method'));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-main().then(() => {
-    console.log("Connected to URL");
-})
-    .catch((err) => {
-        console.log(err);
-    });
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+
+
+console.log("Attempting to connect to MongoDB...");
+console.log("DB_URL:", dbUrl ? "Set (hidden for security)" : "Not set, using fallback");
 
 async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+    await mongoose.connect(dbUrl);
 }
-
-
-app.listen(8080, () => {
-    console.log("Server is listening to port 8080");
-});
-
-
-// app.get("/", (req, res) => {
-//     res.send("App is Working");
-// });
 
 
 app.use(session(sessionOptions));
@@ -94,7 +97,6 @@ app.get("/", (req, res) => {
 });
 
 
-
 app.all("{*splat}", (req, res, next) => {//{*splat} for all
     next(new ExpressError(404, "Page Not Found"));
 });
@@ -105,3 +107,16 @@ app.use((err, req, res, next) => {
     let { status = 500, message } = err;
     res.status(status).render("./listings/error.ejs", { message });
 });
+
+
+// Start server only after MongoDB connection
+main()
+    .then(() => {
+        console.log("Connected to MongoDB");
+        app.listen(8080, () => {
+            console.log("Server is listening to port 8080");
+        });
+    })
+    .catch((err) => {
+        console.log("MongoDB connection error:", err);
+    });
