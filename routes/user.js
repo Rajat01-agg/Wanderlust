@@ -23,7 +23,11 @@ router.route("/login")
 
 router.get("/logout", userController.logout);
 
-// Privacy and Terms pages
+// About, Privacy and Terms pages
+router.get("/about", (req, res) => {
+    res.render("about.ejs");
+});
+
 router.get("/privacy", (req, res) => {
     res.render("privacy.ejs");
 });
