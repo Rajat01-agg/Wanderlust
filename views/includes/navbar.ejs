@@ -1,32 +1,95 @@
 <style>
-    .search-btn{
-        background-color: #fe424d;
-        padding: 0 1rem 0 1rem;
+    .search-btn {
+        background: linear-gradient(135deg, #fe424d, #ff5a64);
+        padding: 0.6rem 1.5rem;
         border-radius: 25px;
         color: white;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(254, 66, 77, 0.3);
     }
 
-    .search-btn:hover{
-        background-color: #fe424d;
-        padding: 0 1rem 0 1rem;
+    .search-btn:hover {
+        background: linear-gradient(135deg, #ff5a64, #fe424d);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(254, 66, 77, 0.4);
         color: white;
     }
 
-    .search-btn i{
+    .search-btn i {
         display: inline;
         margin-right: 0.5rem;
+        transition: transform 0.3s ease;
     }
 
-    .search-inp{
+    .search-btn:hover i {
+        transform: scale(1.1);
+    }
+
+    .search-inp {
         border-radius: 25px;
-        padding: 0.5rem 3rem 0.5rem 3rem;
+        padding: 0.6rem 1.5rem;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+        min-width: 200px;
+    }
+
+    .search-inp:focus {
+        border-color: #fe424d;
+        box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .search-inp::placeholder {
+        color: #999;
+        font-style: italic;
+    }
+
+    @media (max-width: 991px) {
+        .navbar-nav {
+            padding: 1rem 0;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.75rem 1rem !important;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .navbar-nav .nav-link:last-child {
+            border-bottom: none;
+        }
+
+        .search-form-wrapper {
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        .search-form-wrapper form {
+            width: 100%;
+        }
+
+        .search-inp {
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+
+        .search-btn {
+            width: 100%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .navbar-nav.ms-auto {
+            margin-left: auto !important;
+        }
     }
 </style>
 
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -34,7 +97,7 @@
                 <a class="nav-link" href="/listings">Explore</a>
             </div>
 
-            <div class="navbar-nav ms-auto">
+            <div class="navbar-nav ms-auto search-form-wrapper">
                 <form class="d-flex" role="search" action="/listings/search" method="GET">
                     <input class="form-control me-2 search-inp" type="search" name="q" placeholder="Find your next adventure" aria-label="Search" />
                     <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
@@ -46,10 +109,10 @@
                 <% if(!currUser){ %>
                     <a class="nav-link" href="/signup"><b>Sign up</b></a>
                     <a class="nav-link" href="/login"><b>Login</b></a>
-                    <% } %>
-                        <% if(currUser){ %>
-                            <a class="nav-link" href="/logout">Log out</a>
-                            <% } %>
+                <% } %>
+                <% if(currUser){ %>
+                    <a class="nav-link" href="/logout">Log out</a>
+                <% } %>
             </div>
 
         </div>

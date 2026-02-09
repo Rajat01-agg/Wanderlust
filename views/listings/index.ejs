@@ -4,35 +4,156 @@
         #filters {
             margin-top: 1rem;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #fe424d #f0f0f0;
+        }
+
+        #filters::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        #filters::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        #filters::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, #fe424d, #ff6b75);
+            border-radius: 10px;
         }
 
         .filter {
             text-align: center;
-            padding: 0.5rem;
-            margin-right: 1rem;
+            padding: 0.75rem 1rem;
+            margin-right: 0.5rem;
             cursor: pointer;
             opacity: 0.7;
+            transition: all 0.3s ease;
+            border-radius: 0.75rem;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            min-width: 80px;
+            flex-shrink: 0;
         }
 
         .filter:hover {
             opacity: 1;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(254, 66, 77, 0.2);
+            background: linear-gradient(135deg, #fff5f6, #ffffff);
+        }
+
+        .filter i {
+            font-size: 1.2rem;
+            color: #fe424d;
+            transition: transform 0.3s ease;
+        }
+
+        .filter:hover i {
+            transform: scale(1.15);
         }
 
         .filter p {
             font-size: 0.8rem;
-            margin: 0;
+            margin: 0.5rem 0 0 0;
+            font-weight: 500;
+            color: #333;
         }
 
         .tax-toggle {
             margin-left: auto;
-            border: 1px solid black;
-            padding: 1rem;    
-            height: 3.2rem;
+            border: 2px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            height: auto;
             border-radius: 1rem;
             display: flex;
             align-items: center;
+            background: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .tax-toggle:hover {
+            border-color: #fe424d;
+            box-shadow: 0 4px 12px rgba(254, 66, 77, 0.15);
+        }
+
+        .form-check-input:checked {
+            background-color: #fe424d;
+            border-color: #fe424d;
+        }
+
+        .form-check-input:focus {
+            border-color: #fe424d;
+            box-shadow: 0 0 0 0.2rem rgba(254, 66, 77, 0.15);
+        }
+
+        .form-check-label {
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            #filters {
+                gap: 0.5rem;
+                padding: 0.75rem 0;
+            }
+
+            .filter {
+                padding: 0.5rem 0.75rem;
+                min-width: 70px;
+            }
+
+            .filter i {
+                font-size: 1rem;
+            }
+
+            .filter p {
+                font-size: 0.7rem;
+            }
+
+            .tax-toggle {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+
+            .form-check-label {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .filter {
+                min-width: 60px;
+                padding: 0.4rem 0.6rem;
+            }
+
+            .filter i {
+                font-size: 0.9rem;
+            }
+
+            .filter p {
+                font-size: 0.65rem;
+            }
+
+            .tax-toggle {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
+            }
+
+            .form-check-label {
+                font-size: 0.75rem;
+            }
         }
     </style>
 
@@ -81,14 +202,6 @@
             <div class="filter">
                 <div><i class="fa-solid fa-umbrella-beach"></i></div>
                 <p>Beach</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-igloo"></i></div>
-                <p>Domes</p>
-            </div>
-            <div class="filter">
-                <div><i class="fa-solid fa-ship"></i></div>
-                <p>Boat House</p>
             </div>
 
             <div class="tax-toggle">

@@ -2,50 +2,70 @@
 
 
     <body>
-        <div class="row mt-3">
-            <div class="col-8 offset-2 ">
-                <h2 class="mb-3 mt-3">Create a new Listing</h2>
-                <form action="/listings" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
-
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" name="listing[title]" class="form-control" placeholder="Add a Catchy Title" required>
-                        <div class="valid-feedback">This Title looks Good.</div>
+        <div class="row mt-4 mb-5">
+            <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                <div class="card shadow border-0" style="border-radius: 1rem; overflow: hidden;">
+                    <div class="card-header"
+                        style="background: linear-gradient(135deg, #fe424d, #ff6b75); color: white; padding: 1.5rem;">
+                        <h2 class="mb-0"><i class="fa-solid fa-plus-circle"></i> Create a New Listing</h2>
                     </div>
+                    <div class="card-body p-4">
+                        <form action="/listings" method="POST" class="needs-validation" novalidate
+                            enctype="multipart/form-data">
 
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="listing[description]" class="form-control" required></textarea>
-                        <div class="invalid-feedback">Please enter a short Description.</div>
+                            <div class="mb-4">
+                                <label for="title" class="form-label"><i class="fa-solid fa-heading"></i> Title</label>
+                                <input type="text" name="listing[title]" class="form-control"
+                                    placeholder="Add a Catchy Title" required>
+                                <div class="valid-feedback">This Title looks Good.</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="description" class="form-label"><i class="fa-solid fa-align-left"></i>
+                                    Description</label>
+                                <textarea name="listing[description]" class="form-control" rows="4"
+                                    placeholder="Describe your listing..." required></textarea>
+                                <div class="invalid-feedback">Please enter a short Description.</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="image" class="form-label"><i class="fa-solid fa-image"></i> Upload Listing
+                                    Image</label>
+                                <input type="file" name="listing[image]" class="form-control">
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-4 col-12 col-md-4">
+                                    <label for="price" class="form-label"><i class="fa-solid fa-indian-rupee-sign"></i>
+                                        Price</label>
+                                    <input type="number" name="listing[price]" class="form-control"
+                                        placeholder="Enter Price" required>
+                                    <div class="invalid-feedback">Price should be valid.</div>
+                                </div>
+
+                                <div class="mb-4 col-12 col-md-8">
+                                    <label for="country" class="form-label"><i class="fa-solid fa-earth-americas"></i>
+                                        Country</label>
+                                    <input type="text" name="listing[country]" class="form-control"
+                                        placeholder="Enter Country" required>
+                                    <div class="invalid-feedback">Country name should be valid.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="location" class="form-label"><i class="fa-solid fa-location-dot"></i>
+                                    Location</label>
+                                <input type="text" name="listing[location]" class="form-control"
+                                    placeholder="Enter Location" required>
+                                <div class="invalid-feedback">Location should be valid.</div>
+                            </div>
+
+                            <button class="btn btn-lg w-100 add-btn">
+                                <i class="fa-solid fa-plus"></i> Add Listing
+                            </button>
+                        </form>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Upload Listing Image</label>
-                        <input type="file" name="listing[image]" class="form-control">
-                    </div>
-
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label for="price" class="form-label">Price</label>
-                            <input type="number" name="listing[price]" class="form-control" placeholder="Enter Price" required>
-                            <div class="invalid-feedback">Price should be valid.</div>
-                        </div>
-
-                        <div class="mb-3 col-md-8">
-                            <label for="country" class="form-label">Country</label>
-                            <input type="text" name="listing[country]" class="form-control" placeholder="Enter Country" required>
-                            <div class="invalid-feedback">Country name should be valid.</div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Location</label>
-                        <input type="text" name="listing[location]" class="form-control" placeholder="Enter Location" required>
-                        <div class="invalid-feedback">Location should be valid.</div>
-                    </div>
-
-                    <button class="btn btn-dark add-btn mb-3 mt-3">Add</button>
-                </form>
+                </div>
             </div>
         </div>
     </body>

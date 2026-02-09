@@ -1,20 +1,41 @@
 <% layout("/layouts/boilerplate") -%>
+
     <body>
-        <div class="row mt-3">
-            <div class="col-6 offset-3">
-                <h1 class="col-6 offset-3">Login</h1>
-                <form action="/login" method="POST" class="needs-validation" novalidate>
-                        <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" required id="username">
-                        </div>
+        <div class="row mt-5 mb-5">
+            <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                <div class="card shadow-lg border-0" style="border-radius: 1rem; overflow: hidden;">
+                    <div class="card-header text-center"
+                        style="background: linear-gradient(135deg, #fe424d, #ff6b75); color: white; padding: 2rem;">
+                        <h2 class="mb-0"><i class="fa-solid fa-right-to-bracket"></i> Login</h2>
+                    </div>
+                    <div class="card-body p-4">
+                        <form action="/login" method="POST" class="needs-validation" novalidate>
+                            <div class="mb-4">
+                                <label for="username" class="form-label"><i class="fa-solid fa-user"></i>
+                                    Username</label>
+                                <input type="text" name="username" class="form-control" required id="username"
+                                    placeholder="Enter your username">
+                                <div class="invalid-feedback">Please provide a valid username.</div>
+                            </div>
 
-                        <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required id="password">
-                        </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label"><i class="fa-solid fa-lock"></i>
+                                    Password</label>
+                                <input type="password" name="password" class="form-control" required id="password"
+                                    placeholder="Enter your password">
+                                <div class="invalid-feedback">Please provide a valid password.</div>
+                            </div>
 
-                        <button class="btn btn-success">Login</button>
-                </form>
+                            <button class="btn btn-lg w-100 add-btn" type="submit">
+                                <i class="fa-solid fa-arrow-right"></i> Login
+                            </button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p class="mb-0">Don't have an account? <a href="/signup"
+                                    style="color: #fe424d; font-weight: 600;">Sign up</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </body>
