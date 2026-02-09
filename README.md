@@ -2,6 +2,11 @@
 
 WanderLust is a full-stack travel marketplace where hosts can publish boutique stays, guests can browse curated destinations, and authenticated users can leave verified reviews. The stack combines Express, MongoDB, and server-rendered EJS templates with Passport authentication, Multer-powered uploads, and Cloudinary asset delivery to deliver an Airbnb-style experience that stays lightweight for local development.
 
+## 🌐 Live Demo
+**[View Live Application](https://tripnest-nb7z.onrender.com/)**
+
+> **Note:** The application is deployed on Render's free tier, so the first request may take 30-60 seconds to wake up the server.
+
 ## Table of Contents
 1. [Highlights](#highlights)
 2. [Architecture & Flow](#architecture--flow)
@@ -14,12 +19,15 @@ WanderLust is a full-stack travel marketplace where hosts can publish boutique s
 9. [Development Tips](#development-tips)
 10. [Testing & Quality](#testing--quality)
 11. [Scripts](#scripts)
-12. [Roadmap Ideas](#roadmap-ideas)
+12. [Deployment](#deployment)
+13. [Roadmap Ideas](#roadmap-ideas)
 
 ## Highlights
-- **User journeys:** Signup, login, logout, and persistent sessions powered by Passport and Express Session, with flash messaging to guide the UI.
+- **User journeys:** Signup, login, logout, and persistent sessions powered by Passport and Express Session with MongoStore, plus flash messaging to guide the UI.
+- **Cloud database:** MongoDB Atlas integration for production-ready cloud database with secure connection handling and session storage.
 - **Listings lifecycle:** Hosts can create, edit, and delete listings with server-side Joi validation, owner-only authorization, and Cloudinary image management via Multer storage engines.
 - **Review engine:** Authenticated guests can leave 1-5 star reviews with comments; ownership checks and mongoose middleware enforce cascading deletes for orphan prevention.
+- **Legal compliance:** Dedicated Privacy Policy and Terms of Service pages accessible from the footer, ensuring transparency and user trust.
 - **Resilient backend:** Async route handlers are wrapped with `wrapAsync`, all errors funnel through `ExpressError`, and validation schemas protect against malformed payloads.
 - **Seed + styling:** Ready-made seed data spins up example destinations, while responsive EJS layouts and custom CSS provide a polished desktop/mobile experience.
 
@@ -32,9 +40,9 @@ WanderLust is a full-stack travel marketplace where hosts can publish boutique s
 
 ## Tech Stack
 - **Backend:** Node.js, Express 5, Mongoose 8, method-override for RESTful forms.
-- **Authentication:** Passport-local, passport-local-mongoose, bcrypt hashing (via plugin), express-session, connect-flash.
+- **Authentication:** Passport-local, passport-local-mongoose, bcrypt hashing (via plugin), express-session with connect-mongo for session storage, connect-flash.
 - **Templating:** EJS with `ejs-mate`, modular partials, and custom front-end assets.
-- **Storage & Media:** MongoDB (local or Atlas), Multer, multer-storage-cloudinary, Cloudinary SDK.
+- **Storage & Media:** MongoDB Atlas (cloud) or local MongoDB, Multer, multer-storage-cloudinary, Cloudinary SDK.
 - **Validation & Utilities:** Joi schemas, bespoke middleware guards, ExpressError helper, async wrapper utility.
 
 ## Getting Started
@@ -54,13 +62,17 @@ WanderLust is a full-stack travel marketplace where hosts can publish boutique s
    The server defaults to `http://localhost:8080` and connects to `mongodb://127.0.0.1:27017/wanderlust` unless overridden.
 
 ## Environment Variables
+Create a `.env` file in the root directory with the following variables:
 ```
-CLOUD_NAME=your_cloudinary_cloud
-CLOUD_API_KEY=your_cloudinary_key
-CLOUD_API_SECRET=your_cloudinary_secret
-MONGO_URL=mongodb://127.0.0.1:27017/wanderlust   # optional override
-PORT=8080                                         # optional override
-SESSION_SECRET=replace_with_long_random_string     # optional override
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
+
+DB_URL=mongodb+srv://username:password@cluster.mongodb.net/WanderLust
+# For local MongoDB, use: mongodb://127.0.0.1:27017/wanderlust
+
+MAP_TOKEN=your_mapbox_token_here
+SECRET_KEY=your_session_secret_key_here
 ```
 
 ## Database Seeding
@@ -76,6 +88,12 @@ controllers/      Express route handlers for listings, reviews, users
 models/           Mongoose schemas + middleware (Listing, Review, User)
 routes/           REST routers with auth/validation middleware
 views/            EJS templates, layouts, and reusable partials
+  ├── listings/   Listing-related views (index, show, edit, new)
+  ├── users/      User authentication views (signup, login)
+  ├── includes/   Shared partials (navbar, footer, flash)
+  ├── layouts/    Base layout templates
+  ├── privacy.ejs Privacy Policy page
+  └── terms.ejs   Terms of Service page
 public/           Static CSS + vanilla JS served by Express
 util/             ExpressError class and wrapAsync helper
 init/             Seed script and curated listing data
@@ -92,6 +110,8 @@ init/             Seed script and curated listing data
 | POST   | `/listings/:id/reviews`     | Add a review                            | Logged-in |
 | DELETE | `/listings/:id/reviews/:id` | Remove own review                       | Author |
 | GET    | `/signup` / `/login`        | Auth flows                              | Public |
+| GET    | `/privacy`                  | Privacy Policy page                     | Public |
+| GET    | `/terms`                    | Terms of Service page                   | Public |
 
 ## Development Tips
 - Use the `/demouser` route (temporary) to generate a sample account during local testing.
@@ -108,6 +128,21 @@ init/             Seed script and curated listing data
 ## Scripts
 - `npm run dev` → start the Express server (`app.js`).
 - `node init/index.js` → wipe + seed the listings collection.
+
+## Deployment
+The application is deployed on **Render** and is accessible at:
+- **Live URL:** [https://tripnest-nb7z.onrender.com/](https://tripnest-nb7z.onrender.com/)
+
+### Deployment Configuration
+- **Platform:** Render (Free Tier)
+- **Database:** MongoDB Atlas (Cloud)
+- **Media Storage:** Cloudinary
+- **Session Storage:** MongoDB (via connect-mongo)
+
+### Important Notes
+- Free tier instances may spin down after inactivity; first request may take 30-60 seconds to wake up
+- Environment variables are configured in Render's dashboard
+- Automatic deployments are enabled from the main branch
 
 ## Roadmap Ideas
 - Integrate interactive maps (Mapbox or Leaflet) for each listing with geocoded pins.

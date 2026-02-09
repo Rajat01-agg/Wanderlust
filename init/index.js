@@ -1,9 +1,15 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 // const tryData = require("./try.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = process.env.DB_URL;
+
+async function main() {
+    await mongoose.connect(MONGO_URL);
+}
 
 main().then(() => {
     console.log("Connected to URL");
@@ -12,17 +18,13 @@ main().then(() => {
         console.log(err);
     });
 
-async function main() {
-    await mongoose.connect(MONGO_URL);
-}
-
 const initDB = async () => {
     await Listing.deleteMany({});
     initData.data = initData.data.map((obj) =>
     (
         {
             ...obj,
-            owner: "68ab2739ea3ac6b26aa0a2ea"
+            owner: '6989bfd219ab2e69b585342b'
         }
     )
     );
