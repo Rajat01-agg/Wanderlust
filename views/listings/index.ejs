@@ -59,6 +59,24 @@
             transform: scale(1.15);
         }
 
+        .active-filter {
+            opacity: 1;
+            border-bottom: 3px solid #fe424d;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .active-filter p {
+            color: #fe424d !important;
+            font-weight: 700;
+        }
+
+        a.filter {
+            text-decoration: none;
+            color: inherit;
+        }
+
         .filter p {
             font-size: 0.8rem;
             margin: 0.5rem 0 0 0;
@@ -163,46 +181,46 @@
         <button>Create a New Listing</button>
     </form> -->
         <div id="filters">
-            <div class="filter">
+            <a href="/listings?category=Trending" class="filter <%= currentCategory === 'Trending' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-fire"></i></div>
                 <p>Trending</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Rooms" class="filter <%= currentCategory === 'Rooms' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-bed"></i></div>
                 <p>Rooms</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Iconic Cities" class="filter <%= currentCategory === 'Iconic Cities' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-mountain-city"></i></div>
                 <p>Iconic Cities</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Mountains" class="filter <%= currentCategory === 'Mountains' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-mountain"></i></div>
                 <p>Mountains</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Castles" class="filter <%= currentCategory === 'Castles' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-chess"></i></div>
                 <p>Castles</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Amazing Pools" class="filter <%= currentCategory === 'Amazing Pools' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-person-swimming"></i></div>
                 <p>Amazing Pools</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Camping" class="filter <%= currentCategory === 'Camping' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-campground"></i></div>
                 <p>Camping</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Farms" class="filter <%= currentCategory === 'Farms' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-cow"></i></div>
                 <p>Farms</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Arctic" class="filter <%= currentCategory === 'Arctic' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-snowflake"></i></div>
                 <p>Arctic</p>
-            </div>
-            <div class="filter">
+            </a>
+            <a href="/listings?category=Beach" class="filter <%= currentCategory === 'Beach' ? 'active-filter' : '' %>">
                 <div><i class="fa-solid fa-umbrella-beach"></i></div>
                 <p>Beach</p>
-            </div>
+            </a>
 
             <div class="tax-toggle">
                 <div class="form-check-reverse form-switch">

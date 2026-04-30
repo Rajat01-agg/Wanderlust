@@ -34,6 +34,24 @@
                                 <input type="file" name="listing[image]" class="form-control">
                             </div>
 
+                            <div class="mb-4">
+                                <label for="category" class="form-label"><i class="fa-solid fa-list"></i> Category</label>
+                                <select name="listing[category]" class="form-control" required>
+                                    <option value="" disabled selected>Select a category</option>
+                                    <option value="Trending">Trending</option>
+                                    <option value="Rooms">Rooms</option>
+                                    <option value="Iconic Cities">Iconic Cities</option>
+                                    <option value="Mountains">Mountains</option>
+                                    <option value="Castles">Castles</option>
+                                    <option value="Amazing Pools">Amazing Pools</option>
+                                    <option value="Camping">Camping</option>
+                                    <option value="Farms">Farms</option>
+                                    <option value="Arctic">Arctic</option>
+                                    <option value="Beach">Beach</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a category.</div>
+                            </div>
+
                             <div class="row">
                                 <div class="mb-4 col-12 col-md-4">
                                     <label for="price" class="form-label"><i class="fa-solid fa-indian-rupee-sign"></i>
